@@ -1,0 +1,84 @@
+﻿@model IPagedList<Haber.Model.Haberler>
+@using PagedList.Mvc;
+@using PagedList;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Haber Listesi";
+}
+
+<h2>@ViewBag.Title</h2>
+<table class="table">
+    <tr>
+
+        <th>
+           <p>Hızlı Arama</p>
+            <br /><br /><br />
+        </th>
+        
+        <th>
+            <p>Bir sayfada gösterilecek kayıt sayısı</p>
+        </th>
+
+        <th></th>
+    </tr>
+   
+    <tr>
+
+        <th >
+            @Html.DisplayNameFor(model => model.FirstOrDefault().HaberBaslik)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().HaberPhoto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().HaberSirano)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().IsActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().UpdatedAt)
+        </th>
+        <th>
+            <p>Sil</p>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            <a href="@Url.Action("Edit", "Haber",new { id = item.Id })">@item.HaberBaslik</a>
+        </td>
+    
+  
+        <td>
+            <img src="~/CmsFiles/@item.HaberPhoto" style="width:30px" />
+        </td>
+   
+        <td>
+            @item.HaberSirano
+        </td>
+        
+    
+        <td>
+            @item.IsActive
+        </td>
+   
+    
+        <td>
+            @item.UpdatedAt
+        </td>
+        <td>
+            <button type="button">   @Html.ActionLink("SİL", "Delete", new { id = item.Id })  </button>
+        </td>
+    
+        </tr>
+    }
+    
+       
+    
+</table>
+<div style="display:inline-block;color: black;text-decoration: none;margin-left:40%;">
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+
+</div>

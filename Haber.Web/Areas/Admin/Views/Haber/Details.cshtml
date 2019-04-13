@@ -1,0 +1,90 @@
+﻿@model Haber.Model.Haberler
+
+@{
+    ViewBag.Title = "Detay";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Haberler</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HaberBaslik)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HaberBaslik)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HaberDetay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HaberDetay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HaberPhoto)
+        </dt>
+
+        <dd>
+            <img src="~/CmsFiles/@Model.HaberPhoto" style="width:30px" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HaberSirano)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HaberSirano)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedAt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedAt)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
