@@ -11,6 +11,8 @@ using System.Web.Mvc;
 
 namespace Haber.Web.Areas.Admin.Controllers
 {
+    [RouteArea("Admin")]
+    [Authorize]
     public class HaberController : Controller
     {
         private readonly IHaberService haberService;
@@ -21,13 +23,12 @@ namespace Haber.Web.Areas.Admin.Controllers
 
 
         // GET: Admin/Haber
-        public ActionResult Index(int? page)
+        public ActionResult Index()
         {
 
             var haberler = haberService.GetAll();
-            var pageNumber = page ?? 1;
-            var onePageOfPosts = haberler.ToPagedList(pageNumber, 2);
-            return View(onePageOfPosts);
+
+            return View(haberler);
 
         }
 
@@ -49,6 +50,8 @@ namespace Haber.Web.Areas.Admin.Controllers
                     string extension = Path.GetExtension(fileName).ToLower();
                     if (extension == ".jpg" || extension == ".jpeg" || extension == ".png" || extension == ".gif")
                     {
+                        var photoname = Haber.HaberBaslik;
+                        fileName = photoname + extension;
                         string path = Path.Combine(ConfigurationManager.AppSettings["uploadPath"], fileName);
                         upload.SaveAs(path);
                         Haber.HaberPhoto= fileName;

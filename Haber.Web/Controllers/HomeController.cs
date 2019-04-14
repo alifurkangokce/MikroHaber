@@ -18,10 +18,15 @@ namespace Haber.Web.Controllers
         public ActionResult Index(int? page)
         {
             ViewBag.haberler = haberService.GetAll();
-            var haberler = haberService.GetAll();
+            //var haberler = haberService.GetAll();
             var pageNumber = page ?? 1;
+            var haberler = this.haberService.GetAll().Where(f => f.IsActive == true).OrderBy(f => f.HaberSirano);
             var onePageOfPosts = haberler.ToPagedList(pageNumber, 2);
+
+            
+
             return View(onePageOfPosts);
+
             
         }
 
