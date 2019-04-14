@@ -69,8 +69,14 @@
                             @Html.DisplayFor(modelItem => item.UpdatedAt)
                         </td>
                         <td>     
-                            
-                            <a href="@Url.Action("Delete", new { id = item.Id })">Sil</a>
+                            <div class="delete-section">
+                                @*<a class="delete-link"  href="@Url.Action("Delete", new {id = item.Id})"></a>*@
+                                
+                                @*<div class="btn btn-primary delete-confirm" style="display:none" data-delete-id="@item.Id"></div>*@
+                                @Html.ActionLink("Sil", "Delete", new { id = item.Id }, new { onclick = "return confirm ('Silmek istediğinize emin misiniz')" })
+                            </div>
+                           @*<a href="@Url.Action("Delete", new { id = item.Id })">Sil</a>*@
+                           
                         </td>
                     </tr>
                 }
@@ -78,3 +84,81 @@
         </table>
     </div>
 </section>
+
+<style>
+    .delete-section {
+        display: inline;
+    }
+</style>
+@section scripts{
+
+
+
+    <script type="text/javascript">
+
+
+
+    $(function () {
+        $("a.delete-link").click(function () {
+
+                var deleteLink = $(this);
+                deleteLink.hide();
+                var confirmButton = deleteLink.siblings(".delete-confirm");
+                confirmButton.show();
+                
+
+                var cancelDelete = function () {
+                    removeEvents();
+                    showDeleteLink();
+                };
+            
+            var deleteItem = function () {
+                removeEvents();
+                confirmButton.hide();
+                $.post(
+                    '@Url.Action("Delete")',
+                    AddAntiForgeryToken({ id: confirmButton.attr('data-delete-id') }))
+                   .done(function () {
+                       var parentRow = deleteLink.parents("tr:first");
+                       parentRow.fadeOut('fast', function () {
+                           parentRow.remove();
+                       });
+                   }).fail(function (data) {
+                       alert("error");
+                   });
+                return false;
+            };
+
+            var removeEvents = function () {
+                confirmButton.off("click", deleteItem);
+                $(document).on("click", cancelDelete);
+                $(document).off("keypress", onKeyPress);
+            };
+
+            var showDeleteLink = function () {
+                confirmButton.hide();
+                deleteLink.show();
+            };
+
+            var onKeyPress = function (e) {
+                //Cancel if escape key pressed
+                if (e.which == 27) {
+                    cancelDelete();
+                }
+            };
+
+            confirmButton.on("click", deleteItem);
+            $(document).on("click", cancelDelete);
+            $(document).on("keypress", onKeyPress);
+
+            return false;
+        });
+
+        AddAntiForgeryToken = function (data) {
+            data.__RequestVerificationToken = $('input[name=__RequestVerificationToken]').val();
+            return data;
+        };
+    });
+    </script>
+    }
+

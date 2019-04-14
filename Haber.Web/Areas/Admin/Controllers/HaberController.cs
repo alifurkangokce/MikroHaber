@@ -124,6 +124,7 @@ namespace Haber.Web.Areas.Admin.Controllers
         {
             haberService.Delete(id);
             return RedirectToAction("index");
+
         }
 
         public ActionResult Details(Guid id)

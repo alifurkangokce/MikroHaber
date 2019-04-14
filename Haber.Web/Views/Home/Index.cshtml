@@ -22,7 +22,8 @@
                         <td>
                             @item.HaberBaslik
                             <br />
-                            @item.HaberDetay
+                            @item.HaberDetay 
+                            @Html.ActionLink("Devamı", "Details", new { id = item.Id }) 
                         </td>
 
                     </tr>
