@@ -10,6 +10,8 @@ namespace Haber.Web.Controllers
 {
     public class HomeController : Controller
     {
+
+
         private readonly IHaberService haberService;
         public HomeController(IHaberService haberService)
         {
@@ -42,6 +44,17 @@ namespace Haber.Web.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+        public ActionResult Details(string Slug)
+        {
+            var haber = haberService.Find(Slug);
+            if (haber == null)
+            {
+                return HttpNotFound();
+
+            }
+
+            return View(haber);
         }
     }
 }

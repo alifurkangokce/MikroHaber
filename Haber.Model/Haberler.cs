@@ -19,6 +19,7 @@ namespace Haber.Model
         public int HaberSirano { get; set; }
         [Display(Name = "Haber Durumu")]
         public bool IsActive { get; set; }
+        
 
 
     }

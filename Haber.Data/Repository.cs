@@ -22,6 +22,10 @@ namespace Haber.Data
         {
             entities.Remove(entity);
         }
+        public T Find(String slug)
+        {
+            return entities.FirstOrDefault(f=>f.Slug==slug);
+        }
 
         public T Find(Guid id)
         {

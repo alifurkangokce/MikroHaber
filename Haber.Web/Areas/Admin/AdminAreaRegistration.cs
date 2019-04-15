@@ -14,6 +14,17 @@ namespace Haber.Web.Areas.Admin
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
+
+      context.MapRoute(
+   name: "Default1",
+   url: "haber/{slug}",
+
+   defaults: new { controller = "Haber", action = "Details" },
+   namespaces: new[] { "Haber.Web.Areas.Admin.Controllers" }
+);
+
+
+
             context.MapRoute(
                          
                 "Admin_default",
@@ -21,7 +32,7 @@ namespace Haber.Web.Areas.Admin
                 
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 namespaces: new[] { "Haber.Web.Areas.Admin.Controllers" }
-                
+
                
                 
 

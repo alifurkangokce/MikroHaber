@@ -15,6 +15,8 @@ namespace Haber.Service
         void Delete(Haberler entity);
         void Delete(Guid id);
         Haberler Find(Guid id);
+
+        Haberler Find(String slug);
         IEnumerable<Haberler> GetAll();
         IEnumerable<Haberler> GetAllByTitle(string title);
         IEnumerable<Haberler> Search(string title);
@@ -44,6 +46,10 @@ namespace Haber.Service
             {
                 this.Delete(galery);
             }
+        }
+        public Haberler Find(String slug)
+        {
+            return haberRepository.Find(slug);
         }
 
         public Haberler Find(Guid id)

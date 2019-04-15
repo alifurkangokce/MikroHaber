@@ -69,9 +69,10 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Detay", "Details", new { id = Model.Id })
-</div>
+    <div>
+        @*@Html.ActionLink("Detay", "Details", new { id = Model.Id })*@,
+        <a href="/haber/@Model.Slug">Detaylar</a>
+    </div>
 <div>
     @Html.ActionLink("Ana Sayfaya Geri Dön", "Index")
 </div>

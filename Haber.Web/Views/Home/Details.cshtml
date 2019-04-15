@@ -1,0 +1,46 @@
+﻿@model Haber.Model.Haberler
+
+    <h4>Haberler</h4>
+    
+  <article style="width:700px; height:300px;">
+      
+      @{ 
+          string yukari = "";
+          string asagi = "";
+          if (Model.HaberDetay.Length > 400)
+          {
+              yukari = Model.HaberDetay.Substring(0, 400);
+              asagi = Model.HaberDetay.Substring(400);
+          }
+          if (Model.HaberDetay.Length <= 400)
+          {
+              yukari = Model.HaberDetay;
+          }
+      }
+      <div class="container" style="background-color:lightgrey">
+          <div class="row">
+              <h3 style="color:red;">@Model.HaberBaslik</h3>
+              <div class="col-md-12">
+                  @yukari
+              </div>
+              <div class="col-md-12">
+                  <img src="~/CmsFiles/@Model.HaberPhoto" style="width:250px; " />
+              </div>
+              <div class="col-md-12">
+                  @(asagi ?? "")
+              </div>
+          </div>
+      </div>
+
+
+  </article>
+<style>
+    article{
+        width:600px;
+        height:300px;
+        padding:20px;
+        position:relative;
+        margin:auto;
+        
+    }
+</style>

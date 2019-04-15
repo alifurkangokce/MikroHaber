@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -15,6 +16,19 @@ namespace Haber.Web.Areas.Admin.Controllers
     [Authorize]
     public class HaberController : Controller
     {
+        public string GenerateSlug(string phrase)
+        {
+            string str = phrase.ToLower();
+            // invalid chars           
+            str = Regex.Replace(str, @"[^a-z0-9\s-]", "");
+            // convert multiple spaces into one space   
+            str = Regex.Replace(str, @"\s+", " ").Trim();
+            // cut and trim 
+            str = str.Substring(0, str.Length <= 45 ? str.Length : 45).Trim();
+            str = Regex.Replace(str, @"\s", "-"); // hyphens   
+            return str;
+        }
+
         private readonly IHaberService haberService;
         public HaberController(IHaberService haberService)
         {
@@ -42,6 +56,7 @@ namespace Haber.Web.Areas.Admin.Controllers
         [ValidateInput(false)]
         public ActionResult Create(Haberler Haber,HttpPostedFileBase upload)
         {
+        
             if (ModelState.IsValid)
             {
                 if (upload != null && upload.ContentLength > 0)
@@ -55,6 +70,7 @@ namespace Haber.Web.Areas.Admin.Controllers
                         string path = Path.Combine(ConfigurationManager.AppSettings["uploadPath"], fileName);
                         upload.SaveAs(path);
                         Haber.HaberPhoto= fileName;
+                        Haber.Slug = GenerateSlug(Haber.HaberBaslik);
                         haberService.Insert(Haber);
                         return RedirectToAction("index");
                     }
@@ -127,9 +143,9 @@ namespace Haber.Web.Areas.Admin.Controllers
 
         }
 
-        public ActionResult Details(Guid id)
+        public ActionResult Details(string Slug)
         {
-            var haber = haberService.Find(id);
+            var haber = haberService.Find(Slug);
             if (haber == null)
             {
                 return HttpNotFound();
@@ -138,5 +154,8 @@ namespace Haber.Web.Areas.Admin.Controllers
 
             return View(haber);
         }
+
+
+
     }
 }

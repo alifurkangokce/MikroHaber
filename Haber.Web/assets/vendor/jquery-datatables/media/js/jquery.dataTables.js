@@ -10638,7 +10638,7 @@
 		 *      } );
 		 *    } )
 		 */
-		"iDisplayLength": 10,
+		"iDisplayLength": 2,
 	
 	
 		/**
@@ -10910,7 +10910,8 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+            //"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+            "sInfo":"Toplam _TOTAL_ haberimiz var",
 	
 	
 			/**

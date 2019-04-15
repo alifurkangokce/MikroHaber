@@ -12,6 +12,14 @@ namespace Haber.Web
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapRoute(
+name: "Default2",
+url: "home/{slug}",
+
+defaults: new { controller = "Home", action = "Details" },
+namespaces: new[] { "Haber.Web.Controllers" }
+);
+
 
             routes.MapRoute(
                 name: "Default",

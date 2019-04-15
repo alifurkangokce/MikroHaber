@@ -13,6 +13,7 @@ namespace Haber.Data
         void Insert(T entity);
         void Update(T entity);
         void Delete(T entity);
+        T Find(String slug);
         T Find(Guid id);
         T Find(Expression<Func<T, bool>> where);
         IEnumerable<T> GetAll();

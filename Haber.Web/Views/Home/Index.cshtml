@@ -22,8 +22,9 @@
                         <td>
                             @item.HaberBaslik
                             <br />
-                            @item.HaberDetay 
-                            @Html.ActionLink("Devamı", "Details", new { id = item.Id }) 
+                            @(item.HaberDetay.Length > 200 ? item.HaberDetay.Substring(0, 200) + "..." : item.HaberDetay)
+                            @*@Html.ActionLink("Devamı", "Details", new { id = item.Id })*@
+                            <a href="/home/@item.Slug">Detaylar</a>
                         </td>
 
                     </tr>
