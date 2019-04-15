@@ -42,8 +42,10 @@
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.IsActive)
+                        
                     </th>
                     <th>
+                        
                         @Html.DisplayNameFor(model => model.UpdatedAt)
                     </th>
                     <th></th>
@@ -63,9 +65,21 @@
                             @Html.DisplayFor(modelItem => item.HaberSirano)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.IsActive)
+                            @{
+                                if (item.IsActive == true)
+                                {
+                                    <label for="success" class="btn btn-success">@item.IsActive</label>
+                                                               
+                                }
+                                else
+                                {
+                                    <label for="success" class="btn btn-danger">@item.IsActive</label>
+                                }
+                            }
+
                         </td>
                         <td>
+                            
                             @Html.DisplayFor(modelItem => item.UpdatedAt)
                         </td>
                         <td>     
@@ -73,7 +87,9 @@
                                 @*<a class="delete-link"  href="@Url.Action("Delete", new {id = item.Id})"></a>*@
                                 
                                 @*<div class="btn btn-primary delete-confirm" style="display:none" data-delete-id="@item.Id"></div>*@
-                                @Html.ActionLink("Sil", "Delete", new { id = item.Id }, new { onclick = "return confirm ('Silmek istediğinize emin misiniz')" })
+                                <label class="btn btn-danger">
+                                    <p> @Html.ActionLink("Sil", "Delete", new { id = item.Id }, new { onclick = "return confirm ('Silmek istediğinize emin misiniz')" })</p>
+                                </label>
                             </div>
                            @*<a href="@Url.Action("Delete", new { id = item.Id })">Sil</a>*@
                            
@@ -89,6 +105,29 @@
     .delete-section {
         display: inline;
     }
+    .badgebox {
+        opacity: 0;
+    }
+
+        .badgebox + .badge {
+            /* Move the check mark away when unchecked */
+            text-indent: -999999px;
+            /* Makes the badge's width stay the same checked and unchecked */
+            width: 27px;
+        }
+
+        .badgebox:focus + .badge {
+            /* Set something to make the badge looks focused */
+            /* This really depends on the application, in my case it was: */
+            /* Adding a light border */
+            box-shadow: inset 0px 0px 5px;
+            /* Taking the difference out of the padding */
+        }
+
+        .badgebox:checked + .badge {
+            /* Move the check mark back when checked */
+            text-indent: 0;
+        }
 </style>
 @section scripts{
 
@@ -102,6 +141,20 @@
                 "bDestroy": true
             });
         });
+      //  			    $(document).ready(function () {
+      //                      $('#datatable-default').dataTable({
+      //                 "language": {
+			   //       "lengthMenu": 'Display <select>'+
+			   //         '<option value="10">10</option>' +
+		    //        '<option value="20">20</option>' +
+			   //         '<option value="30">30</option>' +
+			   //       '<option value="40">40</option>' +
+			   //          '<option value="-1">All</option>' +
+			   //           }
+      //            } );
+			   //} );
+
+
 
 
 

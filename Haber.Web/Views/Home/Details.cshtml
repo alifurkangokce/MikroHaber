@@ -17,15 +17,18 @@
               yukari = Model.HaberDetay;
           }
       }
-      <div class="container" style="background-color:lightgrey">
+      <div class="container" style="background-color:#eaf2f7;border:1px solid grey; border-color:white">
           <div class="row">
               <h3 style="color:red;">@Model.HaberBaslik</h3>
+              <hr />
               <div class="col-md-12">
                   @yukari
               </div>
+              <br />
               <div class="col-md-12">
-                  <img src="~/CmsFiles/@Model.HaberPhoto" style="width:250px; " />
+                  <img src="~/CmsFiles/@Model.HaberPhoto" style="width:630px;height:300px; " />
               </div>
+              <br />
               <div class="col-md-12">
                   @(asagi ?? "")
               </div>
