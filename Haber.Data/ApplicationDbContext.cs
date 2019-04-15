@@ -23,13 +23,14 @@ namespace Haber.Data
             return new ApplicationDbContext();
         }
         public virtual DbSet<Haberler> Posts { get; set; }
-
+        public virtual DbSet<LogLama> Logs { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             new HaberBuilder(modelBuilder.Entity<Haberler>());
+            new LogBuilder(modelBuilder.Entity<LogLama>());
 
 
         }

@@ -1,4 +1,5 @@
 ﻿using Haber.Service;
+using log4net;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,9 @@ namespace Haber.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private static log4net.ILog Log { get; set; }
+        ILog log = log4net.LogManager.GetLogger(typeof(HomeController)); //type of class
+
 
 
         private readonly IHaberService haberService;
@@ -19,6 +23,14 @@ namespace Haber.Web.Controllers
         }
         public ActionResult Index(int? page)
         {
+            log.Debug("Debug message");
+
+            log.Warn("Warn message");
+
+            log.Error("Error message");
+
+            log.Fatal("Fatal message");
+
             ViewBag.haberler = haberService.GetAll();
             //var haberler = haberService.GetAll();
             var pageNumber = page ?? 1;

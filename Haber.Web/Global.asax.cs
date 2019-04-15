@@ -25,6 +25,7 @@ namespace Haber.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            log4net.Config.XmlConfigurator.Configure();
 
             var builder = new ContainerBuilder();
 
